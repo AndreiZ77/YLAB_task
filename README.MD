@@ -48,7 +48,7 @@ Install the packages necessary for testing::
     'pytest-aiohttp'
 
 
-For testing with a test database, you need to change the line 114 in db_init.py::
+For testing with a test database, you can to change the line 114 in db_init.py::
 
     $ user_db_config = load_config('config/user_config.toml')['database']
     to
