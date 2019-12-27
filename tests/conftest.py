@@ -1,11 +1,11 @@
 import pytest
 
-from ylab_app.main import init_app
-from ylab_app.settings import load_config, BASE_DIR
 from db_init import (
     setup_db, teardown_db,
     create_tables, create_sample_data, drop_tables
 )
+from ylab_app.main import init_app
+from ylab_app.settings import load_config, BASE_DIR
 
 
 @pytest.fixture

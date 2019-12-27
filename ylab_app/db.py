@@ -1,18 +1,16 @@
 from datetime import datetime as dt
-from sqlalchemy.sql import select
-
 
 import asyncpgsa
 from sqlalchemy import (
     MetaData, Table, Column, ForeignKey,
     Integer, String, DateTime, Numeric
 )
+from sqlalchemy.sql import select
 
-from ylab_app.security import generate_password_hash
 from ylab_app.calculate import currency_conversion
+from ylab_app.security import generate_password_hash
 
 metadata = MetaData()
-
 
 users = Table(
     'users', metadata,
@@ -23,7 +21,6 @@ users = Table(
     Column('currency', String(3), ForeignKey('currencies.id', ondelete='CASCADE'))
 )
 
-
 transactions = Table(
     'transactions', metadata,
     Column('id', Integer, primary_key=True),
@@ -32,7 +29,6 @@ transactions = Table(
     Column('amount', Numeric(12, 2), nullable=False, default=0.00),
     Column('timestamp', DateTime, index=True, default=dt.utcnow)
 )
-
 
 currencies = Table(
     'currencies', metadata,
@@ -64,8 +60,8 @@ def construct_db_url(config):
 async def get_user_by_id(conn, id):
     result = await conn.fetchrow(
         users
-        .select()
-        .where(users.c.id == id)
+            .select()
+            .where(users.c.id == id)
     )
     return result
 
@@ -73,8 +69,8 @@ async def get_user_by_id(conn, id):
 async def get_user_by_email(conn, email):
     result = await conn.fetchrow(
         users
-        .select()
-        .where(users.c.email == email)
+            .select()
+            .where(users.c.email == email)
     )
     return result
 
@@ -96,8 +92,8 @@ async def get_currencies(conn):
 async def get_currency_by_id(conn, cur_id):
     result = await conn.fetchrow(
         currencies
-        .select()
-        .where(currencies.c.id == cur_id)
+            .select()
+            .where(currencies.c.id == cur_id)
     )
     return result
 
@@ -125,8 +121,8 @@ async def get_user_transactions(conn, user_id):
                     .where(users.c.id == transactions.c.sender_id)
                     .label("s_email"))
     sender_currency = (select([users.c.currency])
-                    .where(users.c.id == transactions.c.sender_id)
-                    .label("s_currency"))
+                       .where(users.c.id == transactions.c.sender_id)
+                       .label("s_currency"))
     recipient_email = (select([users.c.email])
                        .where(users.c.id == transactions.c.recipient_id)
                        .label("r_email"))

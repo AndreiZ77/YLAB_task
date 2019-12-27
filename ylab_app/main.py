@@ -1,6 +1,7 @@
 import logging
 
 import aiohttp_jinja2
+import aioredis
 import jinja2
 from aiohttp import web
 from aiohttp_security import SessionIdentityPolicy
@@ -8,18 +9,16 @@ from aiohttp_security import authorized_userid
 from aiohttp_security import setup as setup_security
 from aiohttp_session import setup as setup_session
 from aiohttp_session.redis_storage import RedisStorage
-import aioredis
-from ylab_app.db_auth import DBAuthorizationPolicy
+
 from ylab_app.db import init_db
+from ylab_app.db_auth import DBAuthorizationPolicy
 from ylab_app.routes import setup_routes
 from ylab_app.settings import load_config, PACKAGE_NAME
-
 
 log = logging.getLogger(__name__)
 
 
 async def setup_redis(app):
-
     pool = await aioredis.create_redis_pool((
         app['config']['redis']['REDIS_HOST'],
         app['config']['redis']['REDIS_PORT']
@@ -41,7 +40,6 @@ async def current_user_ctx_processor(request):
 
 
 async def init_app(config):
-
     app = web.Application()
 
     app['config'] = config
@@ -80,6 +78,7 @@ def main(configpath):
 
 if __name__ == '__main__':
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Provide path to config file")
     args = parser.parse_args()

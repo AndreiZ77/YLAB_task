@@ -1,10 +1,10 @@
+import re
+
 from ylab_app import db
 from ylab_app.security import check_password_hash
-import re
 
 
 async def validate_login_form(conn, form):
-
     email = form['email']
     password = form['password']
 
@@ -25,9 +25,7 @@ async def validate_login_form(conn, form):
     return 'error'
 
 
-
 async def validate_signup_form(conn, form):
-
     email = form['email']
     password = form['password']
     balance = form['balance']
@@ -59,7 +57,6 @@ async def validate_signup_form(conn, form):
 
 
 async def validate_transfer_form(conn, form):
-
     recipient = form['recipient']
     amount = form['amount']
 

@@ -98,4 +98,3 @@ async def transfer(request):
                 raise redirect(request.app.router, 'index')
     else:
         return {'user': current_user, 'list_users': list_users}
-
