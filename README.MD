@@ -1,6 +1,6 @@
 Task for the company Y_LAB
 ==========================
-Designed using Pithon 3.7 + AIOHTTP (12/2019)
+Designed using Python 3.7 + AIOHTTP (12/2019)
 
 
 Setup
