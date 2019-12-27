@@ -111,7 +111,7 @@ def create_sample_data(target_config=None):
 
 
 if __name__ == '__main__':
-    user_db_config = load_config('config/test_config.toml')['database']
+    user_db_config = load_config('config/user_config.toml')['database']
     admin_db_config = load_config('config/admin_config.toml')['database']
 
     import argparse
