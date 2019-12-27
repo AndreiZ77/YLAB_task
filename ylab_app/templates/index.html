@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>client: {{ user.email }}</h1>
+    <p> balance: {{ user.balance }} ({{ user.currency }})
+        currency_rate of Ruble: {{ currency.rate_rub }}</p>
+    {% for trn in transactions %}
+    <div>
+        <p>[{{ trn.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}]
+            {{ trn.s_email }} >>> {{ trn.r_email }}
+            [<b>{{ trn.amount }} ({{trn.s_currency}})</b>]</p></div>
+    {% endfor %}
+{% endblock %}

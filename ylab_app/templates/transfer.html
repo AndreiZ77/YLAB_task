@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>client: {{ user.email }}</h1>
+    <p> balance: {{ user.balance }} ({{ user.currency }}) </p>
+
+    <h1>Money transfer</h1>
+
+    {% if error %}<div class="error" style="color: red;"><strong>Error:</strong> {{ error }}</div>{% endif %}
+    <form action="/transfer" method="post">
+        <p>
+            {% if list_users %}
+            <label for="recipient">Recipient</label><br>
+            <select id="recipient" name="recipient">
+                {% for usr in list_users %}
+                    <option value={{usr.id}}>{{usr.email}} balance:{{usr.balance}}({{usr.currency}})</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+        </p>
+        <p>
+            <label for="amount">Amount</label><br>
+            <input id="amount" name="amount" type="text" pattern="[-+]?\d{,10}\.?\d{,2}"
+                   placeholder="maximum: 9999999999.99" value="" size=40/>
+            <label>{{ user.currency }}</label>
+        </p>
+        <input type="submit" value="submit"/>
+    </form>
+
+{% endblock %}

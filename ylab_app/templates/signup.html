@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Sign Up</h1>
+
+    {% if error %}<div class="error" style="color: red;"><strong>Error:</strong> {{ error }}</div>{% endif %}
+    <form action="/signup" method="post">
+        <p>
+            <label for="email">User email</label><br>
+            <input id="email" name="email" type="email" placeholder="name@email.com" value="" size=20 autofocus/>
+        </p>
+        <p>
+            <label for="password">Password</label><br>
+            <input id="password" name="password" type="password" value="" size=20/>
+        </p>
+        <p>
+            <label for="balance">Balance</label><br>
+            <input id="balance" name="balance" type="text" pattern="[-+]?\d{,12}\.?\d{,2}"
+                   placeholder="maximum: 999999999999.99" value="" size=20/>
+        </p>
+        <p>
+
+
+            {% if list_currencies %}
+            <label for="currency">Currency</label><br>
+            <select id="currency" name="currency">
+                {% for curr in list_currencies %}
+                    <option value={{curr.id}}>{{curr.id}} ({{curr.name}})</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+
+        </p>
+
+        <input type="submit" value="signup" />
+    </form>
+
+{% endblock %}
+
+
