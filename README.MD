@@ -9,7 +9,7 @@ Setup
 
 Clone the repository, create virtualenv if necessary.
 
-Install the packages necessary for work = [
+Install the packages necessary for work:
     'aiohttp',
     'aiohttp-jinja2',
     'bcrypt',
@@ -20,7 +20,7 @@ Install the packages necessary for work = [
     'asyncpg',
     'asyncpgsa',
     'psycopg2-binary'
-]
+    
 
 To start the application you need running Postgres & Redis servers.
 
@@ -39,3 +39,15 @@ Run server::
 
 (example user/password: ivan@one.com/ivan)
 
+
+Testing
+=======
+
+Install the packages necessary for testing:
+    'pytest',
+    'pytest-aiohttp'
+
+
+Run tests::
+
+    $ pytest tests/test_app.py
